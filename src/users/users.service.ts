@@ -46,12 +46,24 @@ export class UsersService {
    * }
    * ```
    */
-  public async findOne(id: number): Promise<User | null> {
-    const [user]: User[] = await this.orm.em
-      .getConnection()
-      .execute(`select * from "user" where "id" = ${id}`);
+  // public async findOne(id: number): Promise<User | null> {
+  //   const [user]: User[] = await this.orm.em
+  //     .getConnection()
+  //     .execute(`select * from "user" where "id" = ${id}`);
 
-    return this.orm.em.map(User, user);
+  //   return this.orm.em.map(User, user);
+  // }
+
+  // public async findOne(id: number): Promise<User | null> {
+  //   const [user]: User[] = await this.orm.em
+  //     .getConnection()
+  //     .execute(`select * from "user" where "id" = ?`, [id]);
+
+  //   return this.orm.em.map(User, user);
+  // }
+
+  public findOne(id: number): Promise<User | null> {
+    return this.orm.em.findOne({ id });
   }
 
   public async remove(id: number): Promise<void> {
